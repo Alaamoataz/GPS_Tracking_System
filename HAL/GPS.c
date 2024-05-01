@@ -2,9 +2,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include "GPS.h"
-#include "../../LIB/Bit_Utilies.h"
-#include "../../LIB/TM4C123.h"
-#include "../../MCAL/UART/UART.h"
+#include "../LIB/Bit_Utilies.h"
+#include "../LIB/TM4C123.h"
+#include "../MCAL/UART/UART.h"
 
 
 char i=0;
