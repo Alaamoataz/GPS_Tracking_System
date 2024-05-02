@@ -2,15 +2,15 @@
 #include <string.h>
 #include <stdlib.h>
 #include "GPS.h"
-#include "../LIB/Bit_Utilies.h"
-#include "../LIB/TM4C123.h"
-#include "../MCAL/UART/UART.h"
+#include "../../LIB/Bit_Utilies.h"
+#include "../../LIB/TM4C123.h"
+#include "../../MCAL/UART/UART.h"
 
 
 char i=0;
 
 char GPS[80];
-char GPS_logName[]="$GPRMC,"; 
+char GPS_logName[]="$GPRMC,";  
 
 char GPS_formated[12][20];
 char * token ;
@@ -24,7 +24,8 @@ void GPS_read()
 	char flag=1;
 	do{
 		flag=1;
-		
+
+//Check logname		
 do {
 	char i = 0;
     if (UART_GetChar() != GPS_logName[i]) {
@@ -41,13 +42,13 @@ do {
 			recievedChar =UART_GetChar();
 			GPS[fillGPScounter++]=recievedChar;
 		}
-		while(recievedChar!='*');
+		while(recievedChar!='*'); //check end of string
 		
 }
 void GPS_format()
 {
 	char noOfTokenStrings=0;
-	token = strtok (GPS , ",");
+	token = strtok (GPS , ",");  //seprate at comma
 	do
 	{
 		strcpy (GPS_formated[noOfTokenStrings],token);
@@ -73,17 +74,22 @@ if(strcmp(GPS_formated[1],"A")==0)
 				currentLong=-atof(GPS_formated[4]);
 				
 		}
-	}
+}
+
+//convert any angle to degree
 float ToDegree(float angle)
 {
 	int degree = (int)angle/100;
 	float minutes=angle-(float)degree*100;
 	return (degree+(minutes/60));
 
-}float ToRad(float angle)
+}
+
+float ToRad(float angle)
 {
 	return angle *pi /180;
 }
+
 float GPSgetDistance(float currentLong, float currentLat, float destLong, float destLat)
 {
 	//get radian angle
