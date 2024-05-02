@@ -1,11 +1,15 @@
-#include "../Lib/Bit_utilies.h"
-#include "../Lib/TM4C123.h"
-#include "../MCAL/GPIO/GPIO.h"
+
+#include "../../Lib/Bit_utilies.h"
+#include "../../Lib/TM4C123.h"
+#include "../../MCAL/GPIO/GPIO.h"
 #include "LED.h"
 
 void Led_Switch_Init(void)
 {
+    //Initialize Port F
     GPIO_init_PORTF();
+    
+    //Set All Leds and Switches Directions
     Set_direction_PORTF(BLUE_LED ,OUTPUT);   
     Set_direction_PORTF(GREEN_LED ,OUTPUT);   
     Set_direction_PORTF(RED_LED ,OUTPUT);   
@@ -18,13 +22,18 @@ void LED_On(unsigned char Led_Colour)
 {
     
     switch(Led_Colour)
-    {
+    {   
+        //Blue LED On
         case BLUE_LED:
         SET_BIT(GPIO_PORTF_DATA_R, BLUE_LED);
         break;
+
+        //Green Led On
         case GREEN_LED:
         SET_BIT(GPIO_PORTF_DATA_R, GREEN_LED);
         break;
+
+        //Red Led On
         case RED_LED:
         SET_BIT(GPIO_PORTF_DATA_R, RED_LED);
         break;
@@ -73,7 +82,10 @@ unsigned char Switch_input(unsigned char switch_no)
 {
     switch(switch_no)
     {
+        //Get DATA From Switch1
         case switch1: return GET_BIT(GPIO_PORTF_DATA_R,switch1); break;
+
+        //Get DATA From Switch2
         case switch2: return GET_BIT(GPIO_PORTF_DATA_R,switch2); break;
     }   
 }
