@@ -3,15 +3,19 @@
 #include "UART.h"
 
 void UART1_Init(){
-	SYSCTL_PRUART_R |= SYSCTL_PRUART_R1;
-	SYSCTL_RCGCGPIO_R |=SYSCTL_RCGCGPIO_R1;
+	SYSCTL_PRUART_R |= SYSCTL_PRUART_R1;  //Enable Uart Clock
+	SYSCTL_RCGCGPIO_R |=SYSCTL_RCGCGPIO_R1; //Enable Port B Clock
 	while((SYSCTL_PRUART_R & SYSCTL_PRUART_R1) == 0);
-	GPIO_PORTA_AFSEL_R |= 0x3;
+	GPIO_PORTA_AFSEL_R |= 0x3;  // Activate AFSEL for Pin B0-B1
 	GPIO_PORTA_PCTL_R |= GPIO_PCTL_PB0_U1RX | GPIO_PCTL_PB1_U1TX;
-	GPIO_PORTA_DEN_R |= 0x3;
+	GPIO_PORTA_DEN_R |= 0x3;  // Digital Enable Pin B0-B1
+	
 	UART1_CTL_R &= ~UART_CTL_UARTEN;
-	UART1_IBRD_R = 104;
+
+	//Baud Rate
+	UART1_IBRD_R = 104; 
 	UART1_FBRD_R = 11;
+
 	UART1_LCRH_R = (UART_LCRH_WLEN_8 | UART_LCRH_FEN);
 	UART1_CTL_R |= (UART_CTL_RXE | UART_CTL_TXE | UART_CTL_UARTEN);
 }
@@ -46,7 +50,6 @@ char UART_GetChar(void)
 		string [i] = UART_GetChar();											 									
 }
  
-
 
 
 
