@@ -1,8 +1,8 @@
-#include "../Lib/Bit_utilies.h"
-#include "../Lib/TM4C123.h"
-#include "../MCAL/GPIO/GPIO.h"
+#include "../../Lib/Bit_utilies.h"
+#include "../../Lib/TM4C123.h"
+#include "../../MCAL/GPIO/GPIO.h"
 #include "LED.h"
-
+//led initalization
 void Led_Switch_Init(void)
 {
     GPIO_init_PORTF();
@@ -13,7 +13,7 @@ void Led_Switch_Init(void)
     Set_direction_PORTF(switch2 ,INPUT);   
     
 }
-
+//switch on led
 void LED_On(unsigned char Led_Colour)
 {
     
@@ -30,7 +30,7 @@ void LED_On(unsigned char Led_Colour)
         break;
     }
 }
-
+//switch off led
 void LED_Off(unsigned char Led_Colour)
 {
     switch(Led_Colour)
@@ -49,7 +49,7 @@ void LED_Off(unsigned char Led_Colour)
     }
 }
 
-
+//change led situation
 void LED_TOG(unsigned char Led_Colour)
 {
     switch(Led_Colour)
