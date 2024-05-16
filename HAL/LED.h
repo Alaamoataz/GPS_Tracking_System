@@ -1,18 +1,16 @@
-#ifndef LED
-#define LED
+#ifndef LED_H
+#define LED_H
+
+#define RED_LED         0x02
+#define BLUE_LED        0x04
+#define GREEN_LED       0x08
+#define RGB_LED         0x0E 
+#define SW1             0x10 
+#define SW2             0x01 
+
+void RGB_set(char mask);
+void RGB_clear(char mask);
+void RGB(char colour);
 
 
-#define RED_LED 	 	1
-#define BLUE_LED		2
-#define GREEN_LED	    3
-
-#define switch1         4
-#define switch2         0
-
-void Led_Switch_Init(void);
-void LED_On(unsigned char Led_Colour);
-void LED_Off(unsigned char Led_Colour);	
-void LED_Tog(unsigned char Led_Colour); 
-unsigned char Switch_input(unsigned char switch_no);  
-    
-//led header file
+#endif
