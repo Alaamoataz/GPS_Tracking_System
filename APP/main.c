@@ -20,3 +20,17 @@ int main()
 		}
     
 }
+GPS_read();
+        GPS_format();
+
+        currentLat = to_degree(currentLat);
+        currentLong = to_degree(currentLong);
+
+        tot_distance += distance(lat1, long1, currentLat, currentLong);
+        lat1 = currentLat;
+        long1 = currentLong;
+
+        if (tot_distance >= 100 || (GPIO_PORTF_DATA_R & SW1) == 0) {
+            RGB(GREEN_LED);
+            break;
+        }
