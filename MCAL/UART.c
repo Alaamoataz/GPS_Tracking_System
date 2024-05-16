@@ -87,7 +87,7 @@ void Uart0_output_string(char* pt){
 	}
 }
 
-
+// fun to send string to UART0
 void UART0SendString(const char *str) {
     while (*str) {
         while ((UART0_FR_R & UART_FR_TXFF) != 0);  // Wait until the transmitter is not full
@@ -96,7 +96,7 @@ void UART0SendString(const char *str) {
     }
 }
 
-
+// fun to send float to UART0
 void UART0SendFloat(float num) {
 		
     int i;
